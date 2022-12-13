@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.krolikowski.dook.main.MainActivity">
+    <item
+        android:id="@+id/first_fragment"
+        android:icon="@drawable/ic_fragment_first"
+        android:title="@string/first_fragment_label" />
+
+    <item
+        android:id="@+id/second_fragment"
+        android:icon="@drawable/ic_fragment_second"
+        android:title="@string/second_fragment_label" />
+</menu>
