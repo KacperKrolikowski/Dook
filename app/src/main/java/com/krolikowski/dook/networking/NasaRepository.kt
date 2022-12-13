@@ -6,9 +6,15 @@ import javax.inject.Inject
 class NasaRepository @Inject constructor(
     private val nasaAPI: NasaAPI
 ) {
-    suspend fun getImagesFromNasa(imagesCount: Int) : List<ImageEntity> {
-        return nasaAPI.getNasaPictures(imagesCount).map {
-            it.toEntity()
+    suspend fun getImagesFromNasa(imagesCount: Int) : Result<List<ImageEntity>> {
+        val nasaImagesResult = kotlin.runCatching {
+            nasaAPI.getNasaPictures(imagesCount)
+        }
+
+        return nasaImagesResult.mapCatching { list ->
+            list.map { item ->
+                item.toEntity()
+            }
         }
     }
 }

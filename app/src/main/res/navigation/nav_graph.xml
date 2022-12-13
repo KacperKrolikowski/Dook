@@ -9,10 +9,18 @@
         android:id="@+id/first_fragment"
         android:name="com.krolikowski.dook.first.FirstFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first"/>
+        tools:layout="@layout/fragment_first">
+        <action
+            android:id="@+id/action_first_fragment_to_second_fragment"
+            app:destination="@id/second_fragment" />
+    </fragment>
     <fragment
         android:id="@+id/second_fragment"
         android:name="com.krolikowski.dook.second.SecondFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second"/>
+        tools:layout="@layout/fragment_second">
+        <argument
+            android:name="NasaObject"
+            app:argType="com.krolikowski.dook.networking.entities.ImageEntity" />
+    </fragment>
 </navigation>

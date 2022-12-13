@@ -7,7 +7,10 @@ import com.bumptech.glide.Glide
 import com.krolikowski.dook.databinding.RecyclerViewItemBinding
 import com.krolikowski.dook.networking.entities.ImageEntity
 
-class ImagesAdapter(private val images: List<ImageEntity>) :
+class ImagesAdapter(
+    var images: List<ImageEntity> = listOf(),
+    val onItemClick: ((ImageEntity) -> Unit)
+) :
     RecyclerView.Adapter<ImagesAdapter.ImageViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
@@ -20,7 +23,7 @@ class ImagesAdapter(private val images: List<ImageEntity>) :
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val item = images[position]
 
-        with(holder){
+        with(holder) {
             binding.apply {
                 nasaTitle.text = item.title
                 Glide.with(holder.itemView)
@@ -33,5 +36,12 @@ class ImagesAdapter(private val images: List<ImageEntity>) :
     override fun getItemCount() = images.size
 
     inner class ImageViewHolder(val binding: RecyclerViewItemBinding) :
-        RecyclerView.ViewHolder(binding.root)
+        RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            itemView.setOnClickListener {
+                onItemClick.invoke(images[adapterPosition])
+            }
+        }
+    }
 }
