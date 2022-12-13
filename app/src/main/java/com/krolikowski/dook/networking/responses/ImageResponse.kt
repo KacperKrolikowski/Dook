@@ -4,7 +4,7 @@ package com.krolikowski.dook.networking.responses
 import com.google.gson.annotations.SerializedName
 import com.krolikowski.dook.networking.entities.ImageEntity
 
-data class ImagesListResponseItem(
+data class ImageResponse(
     @SerializedName("copyright")
     val copyright: String? = "",
     @SerializedName("date")

@@ -1,4 +1,4 @@
-package com.krolikowski.dook.first
+package com.krolikowski.dook.list
 
 import androidx.lifecycle.viewModelScope
 import com.krolikowski.dook.base.BaseViewModel
@@ -12,16 +12,16 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FirstViewModel @Inject constructor(
+class ListViewModel @Inject constructor(
     private val nasaRepository: NasaRepository
-) : BaseViewModel<FirstViewEvent, FirstViewState>() {
+) : BaseViewModel<ListViewEvent, ListViewState>() {
 
     private var getImagesJob : Job? = null
 
-    override fun onViewEvent(viewEvent: FirstViewEvent) {
+    override fun onViewEvent(viewEvent: ListViewEvent) {
         when (viewEvent) {
-            is FirstViewEvent.GetImages -> getDebounced(viewEvent.imagesCount)
-            is FirstViewEvent.CancelRequest -> cancelGetRequest()
+            is ListViewEvent.GetImages -> getDebounced(viewEvent.imagesCount)
+            is ListViewEvent.CancelRequest -> cancelGetRequest()
         }
     }
 
@@ -52,12 +52,12 @@ class FirstViewModel @Inject constructor(
     }
 
     private fun postSuccessState(images: List<ImageEntity>) =
-        mutableViewState.postValue(FirstViewState.Success(images))
+        mutableViewState.postValue(ListViewState.Success(images))
 
-    private fun postLoadingState() = mutableViewState.postValue(FirstViewState.Loading)
+    private fun postLoadingState() = mutableViewState.postValue(ListViewState.Loading)
 
     private fun postErrorState(error: String) =
-        mutableViewState.postValue(FirstViewState.Error(error))
+        mutableViewState.postValue(ListViewState.Error(error))
 
     companion object {
         private const val DEBOUNCE_TIME = 600L

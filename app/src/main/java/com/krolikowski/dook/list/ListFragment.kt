@@ -1,4 +1,4 @@
-package com.krolikowski.dook.first
+package com.krolikowski.dook.list
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -7,35 +7,34 @@ import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
 import com.krolikowski.dook.base.BaseFragment
-import com.krolikowski.dook.databinding.FragmentFirstBinding
-import com.krolikowski.dook.first.adapter.ImagesAdapter
+import com.krolikowski.dook.databinding.FragmentListBinding
+import com.krolikowski.dook.list.adapter.ImagesAdapter
 import com.krolikowski.dook.networking.entities.ImageEntity
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 @AndroidEntryPoint
-class FirstFragment :
-    BaseFragment<FragmentFirstBinding, FirstViewState, FirstViewEvent, FirstViewModel>(
-        FragmentFirstBinding::inflate
+class ListFragment :
+    BaseFragment<FragmentListBinding, ListViewState, ListViewEvent, ListViewModel>(
+        FragmentListBinding::inflate
     ) {
-    override val viewModel: FirstViewModel by viewModels()
+    override val viewModel: ListViewModel by viewModels()
 
     private val nasaAdapter = ImagesAdapter(onItemClick = ::onItemClick)
 
-    override fun handleViewState(viewState: FirstViewState) {
+    override fun handleViewState(viewState: ListViewState) {
         when (viewState) {
-            is FirstViewState.Success -> setSuccessState(viewState.images)
-            is FirstViewState.Loading -> setLoadingState()
-            is FirstViewState.Error -> setErrorState(viewState.error)
+            is ListViewState.Success -> setSuccessState(viewState.images)
+            is ListViewState.Loading -> setLoadingState()
+            is ListViewState.Error -> setErrorState(viewState.error)
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel.onViewEvent(FirstViewEvent.GetImages(3))
+        viewModel.onViewEvent(ListViewEvent.GetImages(3))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,12 +46,12 @@ class FirstFragment :
                 onFlingListener = null
             }
 
-            picturesNumberPicker.apply {
+            imagesCountNumberPicker.apply {
                 doOnTextChanged { text, _, _, count ->
                     if (count > 0) {
                         text.toString().toInt().let { imagesCount ->
                             if (imagesCount > 0 && imagesCount != nasaAdapter.itemCount) viewModel.onViewEvent(
-                                FirstViewEvent.GetImages(
+                                ListViewEvent.GetImages(
                                     imagesCount
                                 )
                             )
@@ -71,7 +70,8 @@ class FirstFragment :
     private fun setSuccessState(imagesList: List<ImageEntity>) {
         binding.apply {
             functionButton.isVisible = false
-            picturesNumberPicker.isVisible = true
+            imagesCountNumberPicker.isVisible = true
+            imagesCountLabel.isVisible = true
             progressIndicator.isVisible = false
         }
         setImages(imagesList)
@@ -87,7 +87,7 @@ class FirstFragment :
 
     private fun onItemClick(nasaItem: ImageEntity) {
         findNavController().navigate(
-            FirstFragmentDirections.actionFirstFragmentToSecondFragment(
+            ListFragmentDirections.actionFirstFragmentToSecondFragment(
                 nasaItem
             )
         )
@@ -98,12 +98,13 @@ class FirstFragment :
         setEmptyList()
         with(binding) {
             progressIndicator.isVisible = true
-            picturesNumberPicker.isVisible = false
+            imagesCountNumberPicker.isVisible = false
+            imagesCountLabel.isVisible = false
             functionButton.apply {
                 isVisible = true
                 text = "Cancel"
                 setOnClickListener {
-                    viewModel.onViewEvent(FirstViewEvent.CancelRequest)
+                    viewModel.onViewEvent(ListViewEvent.CancelRequest)
                 }
             }
         }
@@ -122,12 +123,13 @@ class FirstFragment :
         setEmptyList()
         with(binding) {
             progressIndicator.isVisible = false
-            picturesNumberPicker.isVisible = false
+            imagesCountNumberPicker.isVisible = false
+            imagesCountLabel.isVisible = false
             functionButton.apply {
                 isVisible = true
                 text = "Retry"
                 setOnClickListener {
-                    viewModel.onViewEvent(FirstViewEvent.GetImages(3))
+                    viewModel.onViewEvent(ListViewEvent.GetImages(3))
                 }
             }
         }

@@ -1,10 +1,10 @@
-package com.krolikowski.dook.first.adapter
+package com.krolikowski.dook.list.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.krolikowski.dook.databinding.RecyclerViewItemBinding
+import com.krolikowski.dook.extensions.loadFromUrl
 import com.krolikowski.dook.networking.entities.ImageEntity
 
 class ImagesAdapter(
@@ -26,9 +26,7 @@ class ImagesAdapter(
         with(holder) {
             binding.apply {
                 nasaTitle.text = item.title
-                Glide.with(holder.itemView)
-                    .load(item.imageUrl)
-                    .into(nasaImage)
+                nasaImage.loadFromUrl(item.imageUrl)
             }
         }
     }
