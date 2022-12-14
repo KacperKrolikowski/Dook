@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="Copyright: "
+            android:text="@string/copyright_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/image" />
 
@@ -42,7 +42,7 @@
             android:id="@+id/date_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date: "
+            android:text="@string/date_title"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/date_value"
-            android:text="Description: " />
+            android:text="@string/description_title" />
 
         <TextView
             android:id="@+id/description_value"

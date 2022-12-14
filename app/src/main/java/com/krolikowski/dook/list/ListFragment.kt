@@ -107,7 +107,7 @@ class ListFragment :
             imagesCountLabel.isVisible = false
             functionButton.apply {
                 isVisible = true
-                text = "Cancel"
+                text = context.getString(R.string.button_cancel)
                 setOnClickListener {
                     viewModel.onViewEvent(ListViewEvent.CancelRequest)
                 }
@@ -115,6 +115,7 @@ class ListFragment :
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun setEmptyList(){
         nasaAdapter.apply{
             images = listOf()
@@ -132,7 +133,7 @@ class ListFragment :
             imagesCountLabel.isVisible = false
             functionButton.apply {
                 isVisible = true
-                text = "Retry"
+                text = context.getString(R.string.button_retry)
                 setOnClickListener {
                     viewModel.onViewEvent(ListViewEvent.GetImages(3))
                 }
@@ -144,7 +145,7 @@ class ListFragment :
         with(binding) {
             errorImage.isVisible = isError
             errorText.apply {
-                if (text.isEmpty() && isError) text = "Something went wrong"
+                if (text.isEmpty() && isError) text = context.getString(R.string.something_went_wrong)
                 isVisible = isError
             }
         }
