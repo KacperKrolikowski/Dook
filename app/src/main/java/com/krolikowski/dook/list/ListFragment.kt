@@ -150,4 +150,11 @@ class ListFragment :
             }
         }
     }
+
+    fun setCounter(asteroidsCounter: Int){
+        binding.asteroidCounterValue.apply {
+            isVisible = true
+            text = "Asteroids counter: $asteroidsCounter"
+        }
+    }
 }
