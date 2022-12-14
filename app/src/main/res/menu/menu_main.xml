@@ -1,12 +1,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.krolikowski.dook.main.MainActivity">
     <item
-        android:id="@+id/list_fragment"
+        android:id="@+id/enable_asteroid_alarm"
         android:title="@string/first_fragment_label" />
 
     <item
-        android:id="@+id/details_fragment"
+        android:id="@+id/start_asteroid_alarm"
+        android:title="@string/second_fragment_label" />
+
+    <item
+        android:id="@+id/stop_asteroid_alarm"
+        android:title="@string/second_fragment_label" />
+
+    <item
+        android:id="@+id/bind_service"
         android:title="@string/second_fragment_label" />
 </menu>

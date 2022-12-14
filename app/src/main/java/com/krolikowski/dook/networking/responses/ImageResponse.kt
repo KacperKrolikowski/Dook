@@ -26,6 +26,7 @@ data class ImageResponse(
         copyright = this.copyright ?: "",
         imageUrl = this.url,
         date = this.date,
-        title = this.title
+        title = this.title,
+        description = this.explanation
     )
 }
