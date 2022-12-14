@@ -7,6 +7,8 @@ import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.get
+import com.krolikowski.dook.R
 import com.krolikowski.dook.base.BaseFragment
 import com.krolikowski.dook.databinding.FragmentListBinding
 import com.krolikowski.dook.list.adapter.ImagesAdapter
@@ -86,11 +88,14 @@ class ListFragment :
     }
 
     private fun onItemClick(nasaItem: ImageEntity) {
-        findNavController().navigate(
-            ListFragmentDirections.actionFirstFragmentToSecondFragment(
-                nasaItem
+        findNavController().apply {
+            graph[R.id.details_fragment].label = nasaItem.title
+            navigate(
+                ListFragmentDirections.actionFirstFragmentToSecondFragment(
+                    nasaItem
+                )
             )
-        )
+        }
     }
 
     private fun setLoadingState() {

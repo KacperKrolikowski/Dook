@@ -12,7 +12,7 @@
         android:layout_height="0dp"
         android:layout_marginVertical="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/images_count_label"
+        app:layout_constraintBottom_toTopOf="@id/images_count_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -59,7 +59,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/error_image" />
+        app:layout_constraintTop_toBottomOf="@id/error_image" />
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/progress_indicator"
@@ -78,7 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/recycler_view"
+        app:layout_constraintBottom_toBottomOf="@id/recycler_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
